@@ -26,16 +26,16 @@ export default function MapScreen() {
 return (
   <div style={{ padding: '16px' }}>
 
-    {selectedOutage ? (
+{selectedOutage ? (
 
-      // ✅ DETAIL SCREENmarginBottom: '16px',
-      <div style={{ 
-        color: 'white'
-        marginBottom: '16px',
-        padding: '8px 12px',
-        background: '#1A1A1A',
-        borderRadius: '6px'
-                  }}>
+  // ✅ DETAIL SCREEN
+  <div style={{ 
+    color: 'white',
+    marginBottom: '16px',
+    padding: '8px 12px',
+    background: '#1A1A1A',
+    borderRadius: '6px'
+  }}>
 
         <button onClick={() => setSelectedOutage(null)}>
           ← Back
