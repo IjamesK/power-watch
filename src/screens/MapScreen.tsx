@@ -1,6 +1,12 @@
+import OutageDetailScreen from './OutageDetailScreen'
 import { useEffect, useState } from 'react'
 
 export default function MapScreen() {
+  const [detailId, setDetailId] = useState<number | null>(null)
+
+  if (detailId !== null) {
+    return <OutageDetailScreen id={detailId} onBack={() => setDetailId(null)} />
+  }
   const [weather, setWeather] = useState<any>(null)
 
   useEffect(() => {
@@ -138,6 +144,7 @@ export default function MapScreen() {
         duration="2h 14m"
         color="#EF4444"
         reports={14}
+        onClick={() => setDetailId(1)}
       />
       <OutageCard
         zone="Kamwokya"
@@ -146,6 +153,7 @@ export default function MapScreen() {
         duration="45m"
         color="#F59E0B"
         reports={6}
+        onClick={() => setDetailId(2)}
       />
       <OutageCard
         zone="Bukoto"
@@ -154,6 +162,7 @@ export default function MapScreen() {
         duration="—"
         color="#3B82F6"
         reports={2}
+        onClick={() => setDetailId(3)}
       />
     </div>
   )
@@ -189,14 +198,17 @@ function OutagePin({ top, left, color, label, detail }: any) {
     </div>
   )
 }
-function OutageCard({ zone, type, cause, duration, color, reports }: any) {
+function OutageCard({ zone, type, cause, duration, color, reports, onClick }: any) {
   return (
-    <div style={{
-      background: '#1A1A1A', border: '1px solid #2A2A2A',
-      borderLeft: `3px solid ${color}`,
-      borderRadius: '10px', padding: '14px 16px',
-      marginBottom: '10px',
-    }}>
+    <div
+      onClick={onClick}
+      style={{
+        cursor: 'pointer',
+        background: '#1A1A1A', border: '1px solid #2A2A2A',
+        borderLeft: `3px solid ${color}`,
+        borderRadius: '10px', padding: '14px 16px',
+        marginBottom: '10px',
+      }}>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '6px' }}>
         <div>
           <div style={{ fontWeight: 700, color: '#fff', fontSize: '15px' }}>{zone}</div>
