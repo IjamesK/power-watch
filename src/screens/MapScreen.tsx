@@ -21,28 +21,6 @@ if (selectedOutage && selectedOutage.zone) {
     </div>
   )
 }
-
-      {/* DETAILS */}
-      <h2 style={{ marginBottom: '8px' }}>{selectedOutage.zone}</h2>
-      <div style={{ color: selectedOutage.color, fontWeight: 600 }}>
-        {selectedOutage.type}
-      </div>
-
-      <div style={{ marginTop: '12px', color: '#9CA3AF' }}>
-        📍 Cause: {selectedOutage.cause}
-      </div>
-
-      <div style={{ marginTop: '8px', color: '#9CA3AF' }}>
-        ⏱ Duration: {selectedOutage.duration}
-      </div>
-
-      <div style={{ marginTop: '8px', color: '#9CA3AF' }}>
-        👥 Reports: {selectedOutage.reports}
-      </div>
-
-    </div>
-  )
-}
   const [weather, setWeather] = useState<any>(null)
 
   useEffect(() => {
