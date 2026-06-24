@@ -159,7 +159,7 @@ export default function MapScreen() {
   )
 }
 
-function OutagePin({ top, left, color, label, detail: _detail }: any) {
+function OutagePin({ top, left, color, label }: any) {
   return (
     <div style={{ position: 'absolute', top, left }}>
       <div style={{
