@@ -3,20 +3,41 @@ import { useEffect, useState } from 'react'
 export default function MapScreen() {
   const [selectedOutage, setSelectedOutage] = useState<any>(null)
 
-if (selectedOutage && selectedOutage.zone) {
+if (selectedOutage) {
   return (
     <div style={{ padding: '16px', color: 'white' }}>
 
-      <button onClick={() => setSelectedOutage(null)}>
+      <button
+        onClick={() => setSelectedOutage(null)}
+        style={{
+          marginBottom: '16px',
+          background: '#1A1A1A',
+          border: '1px solid #2A2A2A',
+          color: '#fff',
+          padding: '8px 12px',
+          borderRadius: '6px'
+        }}
+      >
         ← Back
       </button>
 
-      <h2>{selectedOutage.zone || "Unknown Area"}</h2>
+      <h2>{selectedOutage.zone}</h2>
 
-      <div>{selectedOutage.type || "No type"}</div>
-      <div>📍 {selectedOutage.cause || "No cause"}</div>
-      <div>⏱ {selectedOutage.duration || "-"}</div>
-      <div>👥 {selectedOutage.reports ?? 0}</div>
+      <div style={{ color: selectedOutage.color, fontWeight: 600 }}>
+        {selectedOutage.type}
+      </div>
+
+      <div style={{ marginTop: '12px', color: '#9CA3AF' }}>
+        📍 Cause: {selectedOutage.cause}
+      </div>
+
+      <div style={{ marginTop: '8px', color: '#9CA3AF' }}>
+        ⏱ Duration: {selectedOutage.duration}
+      </div>
+
+      <div style={{ marginTop: '8px', color: '#9CA3AF' }}>
+        👥 Reports: {selectedOutage.reports}
+      </div>
 
     </div>
   )
