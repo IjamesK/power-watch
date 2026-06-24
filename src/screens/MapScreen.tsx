@@ -31,22 +31,11 @@ return (
       // ✅ DETAIL SCREEN
       <div style={{ color: 'white' }}>
 
-        <button
-          onClick={() => setSelectedOutage(null)}
-          style={{
-            marginBottom: '16px',
-            padding: '8px 12px',
-            background: '#1A1A1A',
-            color: '#fff',
-            border: '1px solid #2A2A2A',
-            borderRadius: '6px'
-          }}
-        >
+        <button onClick={() => setSelectedOutage(null)}>
           ← Back
         </button>
 
         <h2>{selectedOutage.zone}</h2>
-
         <div style={{ color: selectedOutage.color }}>
           {selectedOutage.type}
         </div>
@@ -54,19 +43,14 @@ return (
         <div>📍 {selectedOutage.cause}</div>
         <div>⏱ {selectedOutage.duration}</div>
         <div>👥 {selectedOutage.reports}</div>
-       </>
-    )}
-
-  </div>
-)       
 
       </div>
 
     ) : (
 
+      // ✅ MAIN UI
       <>
-
-      {/* ALERT BANNER */}
+             {/* ALERT BANNER */}
       <div style={{
         background: '#1C0A00',
         border: '1px solid #B45309',
@@ -226,10 +210,13 @@ return (
   })
 }
       />
-    </div>
-  )
-}
+      </>
 
+    )}
+
+  </div>
+)
+}    
 function OutagePin({ top, left, color, label, detail }: any) {
   return (
     <div style={{ position: 'absolute', top, left }}>
