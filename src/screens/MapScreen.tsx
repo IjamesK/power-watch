@@ -28,8 +28,14 @@ return (
 
     {selectedOutage ? (
 
-      // ✅ DETAIL SCREEN
-      <div style={{ color: 'white' }}>
+      // ✅ DETAIL SCREENmarginBottom: '16px',
+      <div style={{ 
+        color: 'white'
+        marginBottom: '16px',
+        padding: '8px 12px',
+        background: '#1A1A1A',
+        borderRadius: '6px'
+                  }}>
 
         <button onClick={() => setSelectedOutage(null)}>
           ← Back
@@ -127,7 +133,23 @@ return (
         </div>
 
         {/* OUTAGE PINS */}
-        <OutagePin top={90} left={120} color="#EF4444" label="Ntinda" detail="General Outage · 2h 14m" />
+       <OutagePin
+  top={90}
+  left={120}
+  color="#EF4444"
+  label="Ntinda"
+  detail="General Outage · 2h 14m"
+  onClick={() =>
+    setSelectedOutage({
+      zone: "Ntinda",
+      type: "General Outage",
+      cause: "Infrastructure Fault",
+      duration: "2h 14m",
+      color: "#EF4444",
+      reports: 14
+    })
+  }
+/>
         <OutagePin top={140} left={200} color="#F59E0B" label="Kamwokya" detail="Area Outage · 45m" />
         <OutagePin top={60} left={240} color="#F59E0B" label="Bukoto" detail="Risk Flag · Storm" />
         <OutagePin top={180} left={80} color="#22C55E" label="Makindye" detail="Power Restored" />
@@ -217,14 +239,15 @@ return (
   </div>
 )
 }    
-function OutagePin({ top, left, color, label, detail }: any) {
+function OutagePin({ top, left, color, label, detail, onClick }: any) {
   return (
-    <div style={{ position: 'absolute', top, left }}>
+      <div style={{ position: 'absolute', top, left }} onClick={onClick}> 
       <div style={{
         width: '14px', height: '14px', borderRadius: '50%',
         background: color, border: '2px solid #0D0D0D',
         boxShadow: `0 0 10px ${color}`,
         cursor: 'pointer',
+        opacity: selectedOutage ? 1 : 1, transition: '0.2s'
       }} />
 
       <div style={{
