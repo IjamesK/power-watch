@@ -4,39 +4,24 @@ export default function MapScreen() {
   const [selectedOutage, setSelectedOutage] = useState<any | null>(null)
   const [weather, setWeather] = useState<any>(null)
 
-console.log("CLICKED:", selectedOutage)
-if (selectedOutage !== null) {
+if (selectedOutage) {
   return (
     <div style={{ padding: '16px', color: 'white' }}>
 
-      <button
-        onClick={() => setSelectedOutage(null)}
-        style={{
-          marginBottom: '16px',
-          padding: '8px 12px',
-          background: '#1A1A1A',
-          color: '#fff',
-          border: '1px solid #2A2A2A',
-          borderRadius: '6px'
-        }}
-      >
+      <button onClick={() => setSelectedOutage(null)}>
         ← Back
       </button>
 
-      <h2>{selectedOutage.zone}</h2>
+      <h2>{selectedOutage?.zone || "Unknown"}</h2>
 
-      <div style={{ color: selectedOutage.color }}>
-        {selectedOutage.type}
-      </div>
-
-      <div>📍 {selectedOutage.cause}</div>
-      <div>⏱ {selectedOutage.duration}</div>
-      <div>👥 {selectedOutage.reports}</div>
+      <div>{selectedOutage?.type || "No type"}</div>
+      <div>📍 {selectedOutage?.cause || "No cause"}</div>
+      <div>⏱ {selectedOutage?.duration || "-"}</div>
+      <div>👥 {selectedOutage?.reports ?? 0}</div>
 
     </div>
   )
 }
-
   useEffect(() => {
     fetch('https://api.open-meteo.com/v1/forecast?latitude=0.3163&longitude=32.5822&current=temperature_2m,precipitation,windspeed_10m&timezone=Africa%2FNairobi')
       .then(r => r.json())
