@@ -247,7 +247,8 @@ function OutagePin({ top, left, color, label, detail, onClick }: any) {
         background: color, border: '2px solid #0D0D0D',
         boxShadow: `0 0 10px ${color}`,
         cursor: 'pointer',
-        opacity: selectedOutage ? 1 : 1, transition: '0.2s'
+        opacity: 1,
+        transition: '0.2s'
       }} />
 
       <div style={{
