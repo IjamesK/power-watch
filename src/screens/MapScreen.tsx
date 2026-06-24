@@ -3,23 +3,24 @@ import { useEffect, useState } from 'react'
 export default function MapScreen() {
   const [selectedOutage, setSelectedOutage] = useState<any>(null)
 
-if (selectedOutage) {
+if (selectedOutage && selectedOutage.zone) {
   return (
     <div style={{ padding: '16px', color: 'white' }}>
 
-      {/* BACK BUTTON */}
-      <button
-        onClick={() => setSelectedOutage(null)}
-        style={{
-          marginBottom: '16px',
-          background: '#1A1A1A',
-          border: '1px solid #2A2A2A',
-          color: '#fff',
-          padding: '8px 12px',
-          borderRadius: '6px'
-        }}>
+      <button onClick={() => setSelectedOutage(null)}>
         ← Back
       </button>
+
+      <h2>{selectedOutage.zone || "Unknown Area"}</h2>
+
+      <div>{selectedOutage.type || "No type"}</div>
+      <div>📍 {selectedOutage.cause || "No cause"}</div>
+      <div>⏱ {selectedOutage.duration || "-"}</div>
+      <div>👥 {selectedOutage.reports ?? 0}</div>
+
+    </div>
+  )
+}
 
       {/* DETAILS */}
       <h2 style={{ marginBottom: '8px' }}>{selectedOutage.zone}</h2>
