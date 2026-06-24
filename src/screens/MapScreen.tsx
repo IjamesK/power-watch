@@ -159,7 +159,7 @@ export default function MapScreen() {
   )
 }
 
-function OutagePin({ top, left, color, label }: any) {
+function OutagePin({ top, left, color, label, detail }: any) {
   return (
     <div style={{ position: 'absolute', top, left }}>
       <div style={{
@@ -168,20 +168,27 @@ function OutagePin({ top, left, color, label }: any) {
         boxShadow: `0 0 10px ${color}`,
         cursor: 'pointer',
       }} />
+
       <div style={{
-        position: 'absolute', top: '-28px', left: '50%',
+        position: 'absolute', top: '-40px', left: '50%',
         transform: 'translateX(-50%)',
         background: '#131313', border: '1px solid #2A2A2A',
-        borderRadius: '5px', padding: '3px 7px',
+        borderRadius: '6px', padding: '4px 8px',
         fontSize: '9px', fontWeight: 600, color: '#E5E7EB',
         whiteSpace: 'nowrap',
+        textAlign: 'center'
       }}>
-        {label}
+        <div>{label}</div>
+
+        {detail && (
+          <div style={{ fontSize: '8px', color: '#9CA3AF', marginTop: '2px' }}>
+            {detail}
+          </div>
+        )}
       </div>
     </div>
   )
 }
-
 function OutageCard({ zone, type, cause, duration, color, reports }: any) {
   return (
     <div style={{
