@@ -1,4 +1,3 @@
-import OutageDetailScreen from './OutageDetailScreen'
 import { useEffect, useState } from 'react'
 
 export default function MapScreen() {
