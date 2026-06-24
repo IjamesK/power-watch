@@ -2,10 +2,47 @@ import OutageDetailScreen from './OutageDetailScreen'
 import { useEffect, useState } from 'react'
 
 export default function MapScreen() {
-  const [detailId, setDetailId] = useState<number | null>(null)
+  const [selectedOutage, setSelectedOutage] = useState<any>(null)
 
-  if (detailId !== null) {
-    return <OutageDetailScreen id={detailId} onBack={() => setDetailId(null)} />
+if (selectedOutage) {
+  return (
+    <div style={{ padding: '16px', color: 'white' }}>
+
+      {/* BACK BUTTON */}
+      <button
+        onClick={() => setSelectedOutage(null)}
+        style={{
+          marginBottom: '16px',
+          background: '#1A1A1A',
+          border: '1px solid #2A2A2A',
+          color: '#fff',
+          padding: '8px 12px',
+          borderRadius: '6px'
+        }}>
+        ← Back
+      </button>
+
+      {/* DETAILS */}
+      <h2 style={{ marginBottom: '8px' }}>{selectedOutage.zone}</h2>
+      <div style={{ color: selectedOutage.color, fontWeight: 600 }}>
+        {selectedOutage.type}
+      </div>
+
+      <div style={{ marginTop: '12px', color: '#9CA3AF' }}>
+        📍 Cause: {selectedOutage.cause}
+      </div>
+
+      <div style={{ marginTop: '8px', color: '#9CA3AF' }}>
+        ⏱ Duration: {selectedOutage.duration}
+      </div>
+
+      <div style={{ marginTop: '8px', color: '#9CA3AF' }}>
+        👥 Reports: {selectedOutage.reports}
+      </div>
+
+    </div>
+  )
+}
   }
   const [weather, setWeather] = useState<any>(null)
 
@@ -137,15 +174,24 @@ export default function MapScreen() {
       {/* OUTAGE CARDS */}
       <div style={{ fontWeight: 600, fontSize: '13px', color: '#9CA3AF', marginBottom: '10px', letterSpacing: '0.05em', textTransform: 'uppercase' }}>Active Incidents</div>
 
-      <OutageCard
-        zone="Ntinda"
-        type="General Outage"
-        cause="Infrastructure Fault"
-        duration="2h 14m"
-        color="#EF4444"
-        reports={14}
-        onClick={() => setDetailId(1)}
-      />
+     <OutageCard
+  zone="Ntinda"
+  type="General Outage"
+  cause="Infrastructure Fault"
+  duration="2h 14m"
+  color="#EF4444"
+  reports={14}
+  onClick={() =>
+    setSelectedOutage({
+      zone: "Ntinda",
+      type: "General Outage",
+      cause: "Infrastructure Fault",
+      duration: "2h 14m",
+      color: "#EF4444",
+      reports: 14
+    })
+  }
+/>
       <OutageCard
         zone="Kamwokya"
         type="Area Outage"
