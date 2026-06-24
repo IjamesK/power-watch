@@ -43,7 +43,6 @@ if (selectedOutage) {
     </div>
   )
 }
-  }
   const [weather, setWeather] = useState<any>(null)
 
   useEffect(() => {
@@ -199,7 +198,16 @@ if (selectedOutage) {
         duration="45m"
         color="#F59E0B"
         reports={6}
-        onClick={() => setDetailId(2)}
+      onClick={() =>
+  setSelectedOutage({
+    zone: "Kamwokya",
+    type: "Area Outage",
+    cause: "Road Construction — KCCA Works",
+    duration: "45m",
+    color: "#F59E0B",
+    reports: 6
+  })
+}
       />
       <OutageCard
         zone="Bukoto"
@@ -208,7 +216,16 @@ if (selectedOutage) {
         duration="—"
         color="#3B82F6"
         reports={2}
-        onClick={() => setDetailId(3)}
+       onClick={() =>
+  setSelectedOutage({
+    zone: "Bukoto",
+    type: "Risk Flag",
+    cause: "Heavy rain forecast · Next 3hrs",
+    duration: "—",
+    color: "#3B82F6",
+    reports: 2
+  })
+}
       />
     </div>
   )
