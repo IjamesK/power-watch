@@ -3,7 +3,8 @@ import { useEffect, useState } from 'react'
 export default function MapScreen() {
   const [selectedOutage, setSelectedOutage] = useState<any>(null)
 
-if (selectedOutage) {
+console.log("CLICKED:", selectedOutage)
+  if (selectedOutage) {
   return (
     <div style={{ padding: '16px', color: 'white' }}>
 
