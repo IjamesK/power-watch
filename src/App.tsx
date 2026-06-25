@@ -97,10 +97,10 @@ borderBottom: darkMode
       {/* SCREEN CONTENT */}
       <div style={{ flex: 1, overflowY: 'auto', paddingBottom: '80px' }}>
       {screen === 'map' && <MapScreen darkMode={darkMode} />}
-      {screen === 'report' && <ReportScreen darkMode={darkMode} />}
-      {screen === 'learn' && <LearnScreen darkMode={darkMode} />}
-      {screen === 'alerts' && <AlertsScreen darkMode={darkMode} />}
-      {screen === 'moderator' && <ModeratorScreen darkMode={darkMode} />}
+      {screen === 'report' && <ReportScreen />}
+      {screen === 'learn' && <LearnScreen />}
+      {screen === 'alerts' && <AlertsScreen />}
+      {screen === 'moderator' && <ModeratorScreen />}
       </div>
 
       {/* BOTTOM NAV */}
