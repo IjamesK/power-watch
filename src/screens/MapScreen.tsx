@@ -239,7 +239,19 @@ return (
       reports: 12
     })
   }/>
-        <OutagePin top={60} left={240} color="#F59E0B" label="Bukoto" detail="Risk Flag · Storm" />
+        <OutagePin 
+          top={60} left={240} color="#F59E0B" label="Bukoto" detail="Risk Flag · Storm"
+                onClick={() =>
+    setSelectedOutage({
+      zone: "Bukoto",
+      type: "Risk Flag",
+      cause: "Heavy rain forecast",
+      duration: "_",
+      color: "#EF4444",
+      reports: 2
+    })
+  }
+          />
         <OutagePin top={180} left={80} color="#22C55E" label="Makindye" detail="Power Restored" />
 
         {/* LEGEND */}
