@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 
-export default function MapScreen({ darkMode }: any) {
+export default function MapScreen() {
   const [selectedOutage, setSelectedOutage] = useState<any | null>(null)
   const [weather, setWeather] = useState<any>(null)
 
