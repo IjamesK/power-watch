@@ -1,14 +1,16 @@
 import { useState } from 'react'
 import './index.css'
+import { ThemeProvider, useTheme } from './theme'
 import MapScreen from './screens/MapScreen'
 import ReportScreen from './screens/ReportScreen'
 import LearnScreen from './screens/LearnScreen'
 import AlertsScreen from './screens/AlertsScreen'
 import ModeratorScreen from './screens/ModeratorScreen'
 
-export default function App() {
+function AppInner() {
+  const { dark, toggle, c } = useTheme()
   const [screen, setScreen] = useState<'map' | 'report' | 'learn' | 'alerts' | 'moderator'>('map')
-  const [darkMode, setDarkMode] = useState(true)
+
   const tabs = [
     { id: 'map', icon: '🗺️', label: 'Map' },
     { id: 'report', icon: '📋', label: 'Report' },
@@ -17,22 +19,12 @@ export default function App() {
   ]
 
   return (
-   <div
-  style={{
-    display: 'flex',
-    flexDirection: 'column',
-    minHeight: '100vh',
-    background: darkMode ? '#0D0D0D' : '#F8FAFC',
-    color: darkMode ? '#FFFFFF' : '#111827'
-  }}
->
+    <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
 
       {/* TOP BAR */}
       <div style={{
-        background: darkMode ? '#131313' : '#FFFFFF',
-borderBottom: darkMode
-  ? '1px solid #2A2A2A'
-  : '1px solid #E5E7EB',
+        background: c.topbar,
+        borderBottom: `1px solid ${c.border}`,
         padding: '14px 20px',
         display: 'flex',
         alignItems: 'center',
@@ -41,54 +33,41 @@ borderBottom: darkMode
         top: 0,
         zIndex: 100,
       }}>
-<div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+          <div style={{ fontFamily: 'Syne, sans-serif', fontWeight: 800, fontSize: '18px', color: c.text }}>
+            ⚡ Power<span style={{ color: '#F59E0B' }}>Watch</span>
+          </div>
+          {/* THEME TOGGLE */}
+          <button
+            onClick={toggle}
+            title="Toggle theme"
+            style={{
+              width: '44px', height: '24px',
+              borderRadius: '12px',
+              background: dark ? '#F59E0B' : '#D1D5DB',
+              border: 'none', cursor: 'pointer',
+              position: 'relative', flexShrink: 0,
+            }}>
+            <div style={{
+              width: '18px', height: '18px', borderRadius: '50%',
+              background: '#fff',
+              position: 'absolute', top: '3px',
+              left: dark ? '23px' : '3px',
+              transition: 'left 0.2s',
+            }} />
+          </button>
+          <span style={{ fontSize: '11px', color: c.subtext }}>{dark ? '🌙' : '☀️'}</span>
+        </div>
 
-  <div style={{
-    fontFamily: 'Syne, sans-serif',
-    fontWeight: 800,
-    fontSize: '18px',
-    color: darkMode ? '#fff' : '#111827'
-  }}>
-    ⚡ Power<span style={{ color: '#F59E0B' }}>Watch</span>
-  </div>
-
-  <button
-    onClick={() => setDarkMode(!darkMode)}
-    style={{
-      width: '48px',
-      height: '24px',
-      borderRadius: '12px',
-      background: darkMode ? '#F59E0B' : '#D1D5DB',
-      border: 'none',
-      position: 'relative',
-      cursor: 'pointer'
-    }}
-  >
-    <div
-      style={{
-        width: '20px',
-        height: '20px',
-        borderRadius: '50%',
-        background: '#fff',
-        position: 'absolute',
-        top: '2px',
-        left: darkMode ? '26px' : '2px',
-        transition: '0.2s'
-      }}
-    />
-  </button>
-
-</div>
         <button
           onClick={() => setScreen('moderator')}
           style={{
-            background: screen === 'moderator' ? '#F59E0B' : '#1A1A1A',
-            color: screen === 'moderator' ? '#000' : '#6B7280',
-            border: '1px solid #2A2A2A',
+            background: screen === 'moderator' ? '#F59E0B' : c.panel,
+            color: screen === 'moderator' ? '#000' : c.subtext,
+            border: `1px solid ${c.border}`,
             borderRadius: '6px',
             padding: '5px 10px',
-            fontSize: '11px',
-            fontWeight: 600,
+            fontSize: '11px', fontWeight: 600,
           }}>
           🛡 Mod
         </button>
@@ -96,41 +75,32 @@ borderBottom: darkMode
 
       {/* SCREEN CONTENT */}
       <div style={{ flex: 1, overflowY: 'auto', paddingBottom: '80px' }}>
-      {screen === 'map' && <MapScreen darkMode={darkMode} />}
-      {screen === 'report' && <ReportScreen />}
-      {screen === 'learn' && <LearnScreen />}
-      {screen === 'alerts' && <AlertsScreen />}
-      {screen === 'moderator' && <ModeratorScreen />}
+        {screen === 'map' && <MapScreen />}
+        {screen === 'report' && <ReportScreen />}
+        {screen === 'learn' && <LearnScreen />}
+        {screen === 'alerts' && <AlertsScreen />}
+        {screen === 'moderator' && <ModeratorScreen />}
       </div>
 
       {/* BOTTOM NAV */}
       <div style={{
-        position: 'fixed',
-        bottom: 0,
-        left: '50%',
-        transform: 'translateX(-50%)',
-        width: '100%',
-        maxWidth: '430px',
-        background: darkMode ? '#131313' : '#FFFFFF',
-        borderTop: darkMode
-         ? '1px solid #2A2A2A'
-        : '1px solid #E5E7EB',
-        display: 'flex',
-        zIndex: 100,
+        position: 'fixed', bottom: 0,
+        left: '50%', transform: 'translateX(-50%)',
+        width: '100%', maxWidth: '430px',
+        background: c.topbar,
+        borderTop: `1px solid ${c.border}`,
+        display: 'flex', zIndex: 100,
       }}>
         {tabs.map((tab: any) => (
           <button
             key={tab.id}
             onClick={() => setScreen(tab.id as any)}
             style={{
-              flex: 1,
-              padding: '10px 0',
+              flex: 1, padding: '10px 0',
               background: 'transparent',
-              color: screen === tab.id ? '#F59E0B' : '#6B7280',
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-              gap: '3px',
+              color: screen === tab.id ? '#F59E0B' : c.subtext,
+              display: 'flex', flexDirection: 'column',
+              alignItems: 'center', gap: '3px',
               borderTop: screen === tab.id ? '2px solid #F59E0B' : '2px solid transparent',
               transition: 'all 0.15s',
             }}>
@@ -152,5 +122,13 @@ borderBottom: darkMode
         ))}
       </div>
     </div>
+  )
+}
+
+export default function App() {
+  return (
+    <ThemeProvider>
+      <AppInner />
+    </ThemeProvider>
   )
 }
