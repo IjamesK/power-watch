@@ -318,17 +318,16 @@ return (
 }    
 function OutagePin({ top, left, color, label, detail, onClick }: any) {
   return (
-      <div style={{ position: 'absolute', top, left }} onClick={onClick}> 
+    <div style={{ position: 'absolute', top, left }} onClick={onClick}>
       <div style={{
         width: '14px', height: '14px', borderRadius: '50%',
         background: color, border: '2px solid #0D0D0D',
         boxShadow: `0 0 10px ${color}`,
         cursor: 'pointer',
         opacity: 1,
-        transition: '0.2s'
-        animation: 'pulse 2s infinite'
+        transition: '0.2s',
+        animation: 'pulse 2s infinite',
       }} />
-
       <div style={{
         position: 'absolute', top: '-40px', left: '50%',
         transform: 'translateX(-50%)',
@@ -336,10 +335,9 @@ function OutagePin({ top, left, color, label, detail, onClick }: any) {
         borderRadius: '6px', padding: '4px 8px',
         fontSize: '9px', fontWeight: 600, color: '#E5E7EB',
         whiteSpace: 'nowrap',
-        textAlign: 'center'
+        textAlign: 'center',
       }}>
         <div>{label}</div>
-
         {detail && (
           <div style={{ fontSize: '8px', color: '#9CA3AF', marginTop: '2px' }}>
             {detail}
