@@ -26,31 +26,108 @@ export default function MapScreen() {
 return (
   <div style={{ padding: '16px' }}>
 
-{selectedOutage ? (
+    {selectedOutage ? (
+  <div>
+    {/* BACK */}
+    <button
+      onClick={() => setSelectedOutage(null)}
+      style={{
+        background: '#1A1A1A', border: '1px solid #2A2A2A',
+        borderRadius: '8px', padding: '8px 14px',
+        color: '#9CA3AF', fontSize: '13px', fontWeight: 600,
+        marginBottom: '16px', display: 'flex', alignItems: 'center', gap: '6px',
+      }}>
+      ← Back to Map
+    </button>
 
-  // ✅ DETAIL SCREEN
-  <div style={{ 
-    color: 'white',
-    marginBottom: '16px',
-    padding: '8px 12px',
-    background: '#1A1A1A',
-    borderRadius: '6px'
-  }}>
-
-        <button onClick={() => setSelectedOutage(null)}>
-          ← Back
-        </button>
-
-        <h2>{selectedOutage.zone}</h2>
-        <div style={{ color: selectedOutage.color }}>
-          {selectedOutage.type}
+    {/* HEADER CARD */}
+    <div style={{
+      background: '#1A1A1A',
+      border: `1px solid ${selectedOutage.color}44`,
+      borderLeft: `4px solid ${selectedOutage.color}`,
+      borderRadius: '12px', padding: '18px', marginBottom: '14px',
+    }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '10px' }}>
+        <div>
+          <div style={{ fontFamily: 'Syne, sans-serif', fontWeight: 800, fontSize: '22px', color: '#fff', marginBottom: '4px' }}>
+            {selectedOutage.zone}
+          </div>
+          <div style={{ fontSize: '13px', fontWeight: 600, color: selectedOutage.color }}>
+            {selectedOutage.type}
+          </div>
         </div>
-
-        <div>📍 {selectedOutage.cause}</div>
-        <div>⏱ {selectedOutage.duration}</div>
-        <div>👥 {selectedOutage.reports}</div>
-
+        <div style={{
+          background: '#131313', border: `1px solid ${selectedOutage.color}44`,
+          borderRadius: '8px', padding: '8px 14px', textAlign: 'center',
+        }}>
+          <div style={{ fontSize: '18px', fontWeight: 800, color: '#fff', fontFamily: 'Syne, sans-serif' }}>
+            {selectedOutage.duration}
+          </div>
+          <div style={{ fontSize: '10px', color: '#6B7280' }}>duration</div>
+        </div>
       </div>
+      <div style={{ fontSize: '12px', color: '#6B7280' }}>
+        📍 {selectedOutage.cause} &nbsp;·&nbsp; 👥 {selectedOutage.reports} reports
+      </div>
+    </div>
+
+    {/* AFFECTED AREAS */}
+    <div style={{
+      background: '#1A1A1A', border: '1px solid #2A2A2A',
+      borderRadius: '10px', padding: '14px 16px', marginBottom: '14px',
+    }}>
+      <div style={{ fontSize: '11px', fontWeight: 600, color: selectedOutage.color, textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '10px' }}>
+        📍 Affected Areas
+      </div>
+      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
+        {['Trading Centre', 'Main Road', 'Stage Area', 'Nearby Estates'].map(area => (
+          <div key={area} style={{
+            background: '#131313', border: '1px solid #2A2A2A',
+            borderRadius: '6px', padding: '5px 12px',
+            fontSize: '12px', color: '#E5E7EB',
+          }}>
+            {selectedOutage.zone} {area}
+          </div>
+        ))}
+      </div>
+    </div>
+
+    {/* CHECKLIST */}
+    <div style={{
+      background: '#1A1A1A', border: '1px solid #2A2A2A',
+      borderRadius: '10px', padding: '14px 16px', marginBottom: '14px',
+    }}>
+      <div style={{ fontSize: '11px', fontWeight: 600, color: selectedOutage.color, textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '10px' }}>
+        📋 What To Do Now
+      </div>
+      {[
+        'Switch off heavy appliances to prevent surge damage',
+        'Save all open work on your devices now',
+        'Inform customers — estimate 2–4 more hours',
+        'Wait 2 minutes after power returns before switching back on',
+      ].map((item, i, arr) => (
+        <div key={i} style={{
+          display: 'flex', gap: '10px', padding: '8px 0',
+          borderBottom: i < arr.length - 1 ? '1px solid #2A2A2A' : 'none',
+          alignItems: 'flex-start',
+        }}>
+          <span style={{ color: selectedOutage.color, fontWeight: 700, flexShrink: 0 }}>→</span>
+          <span style={{ fontSize: '13px', color: '#9CA3AF', lineHeight: 1.5 }}>{item}</span>
+        </div>
+      ))}
+    </div>
+
+    {/* POWER RESTORED BUTTON */}
+    <button
+      style={{
+        width: '100%', background: '#052E16',
+        border: '1px solid #22C55E44', borderRadius: '10px',
+        padding: '16px', color: '#22C55E',
+        fontSize: '15px', fontWeight: 700, cursor: 'pointer',
+      }}>
+      ✓ Power is back in my area
+    </button>
+  </div>
 
     ) : (
 
