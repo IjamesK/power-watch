@@ -1,3 +1,4 @@
+import { useTheme } from '../theme'
 import { useEffect, useState } from 'react'
 
 export default function MapScreen({ darkMode }: any) {
