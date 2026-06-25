@@ -252,7 +252,19 @@ return (
     })
   }
           />
-        <OutagePin top={180} left={80} color="#22C55E" label="Makindye" detail="Power Restored" />
+        <OutagePin 
+          top={180} left={80} color="#22C55E" label="Makindye" detail="Power Restored" 
+                          onClick={() =>
+    setSelectedOutage({
+      zone: "Makindye",
+      type: "Power Restored",
+      cause: "Outage, But power has been restored",
+      duration: "_",
+      color: "#EF4444",
+      reports: 2
+    })
+  }
+          />
 
         {/* LEGEND */}
         <div style={{
