@@ -1,15 +1,20 @@
 import { useState } from 'react'
-import './App.css'
-
-// ── SCREENS ──
+import './index.css'
 import MapScreen from './screens/MapScreen'
 import ReportScreen from './screens/ReportScreen'
 import LearnScreen from './screens/LearnScreen'
-import Screen from './screens/Screen'
+import AlertsScreen from './screens/AlertsScreen'
 import ModeratorScreen from './screens/ModeratorScreen'
 
 export default function App() {
-  const [screen, setScreen] = useState<'map' | 'report' | 'learn' | '' | 'moderator'>('map')
+  const [screen, setScreen] = useState<'map' | 'report' | 'learn' | 'alerts' | 'moderator'>('map')
+
+  const tabs = [
+    { id: 'map', icon: '🗺️', label: 'Map' },
+    { id: 'report', icon: '📋', label: 'Report' },
+    { id: 'learn', icon: '📚', label: 'Learn' },
+    { id: 'alerts', icon: '🔔', label: 'Alerts', badge: 2 },
+  ]
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
@@ -66,12 +71,7 @@ export default function App() {
         display: 'flex',
         zIndex: 100,
       }}>
-        {[
-          { id: 'map', icon: '🗺️', label: 'Map' },
-          { id: 'report', icon: '📋', label: 'Report' },
-          { id: 'learn', icon: '📚', label: 'Learn' },
-          { id: 'alerts', icon: '🔔', label: 'Alerts', badge: 2 },
-        ].map(tab => (
+        {tabs.map((tab: any) => (
           <button
             key={tab.id}
             onClick={() => setScreen(tab.id as any)}
@@ -88,19 +88,18 @@ export default function App() {
               transition: 'all 0.15s',
             }}>
             <div style={{ position: 'relative', display: 'inline-block' }}>
-  <span style={{ fontSize: '18px' }}>{tab.icon}</span>
-  {tab.badge && (
-    <span style={{
-      position: 'absolute', top: '-4px', right: '-6px',
-      background: '#EF4444', color: '#fff',
-      fontSize: '9px', fontWeight: 700,
-      width: '14px', height: '14px',
-      borderRadius: '50%', display: 'flex',
-      alignItems: 'center', justifyContent: 'center',
-    }}>{tab.badge}</span>
-  )}
-</div>
-<span style={{ fontSize: '10px', fontWeight: 600 }}>{tab.label}</span>
+              <span style={{ fontSize: '18px' }}>{tab.icon}</span>
+              {tab.badge && (
+                <span style={{
+                  position: 'absolute', top: '-4px', right: '-6px',
+                  background: '#EF4444', color: '#fff',
+                  fontSize: '9px', fontWeight: 700,
+                  width: '14px', height: '14px',
+                  borderRadius: '50%', display: 'flex',
+                  alignItems: 'center', justifyContent: 'center',
+                }}>{tab.badge}</span>
+              )}
+            </div>
             <span style={{ fontSize: '10px', fontWeight: 600 }}>{tab.label}</span>
           </button>
         ))}
