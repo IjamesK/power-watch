@@ -326,6 +326,7 @@ function OutagePin({ top, left, color, label, detail, onClick }: any) {
         cursor: 'pointer',
         opacity: 1,
         transition: '0.2s'
+        animation: 'pulse 2s infinite'
       }} />
 
       <div style={{
