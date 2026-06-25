@@ -8,7 +8,7 @@ import ModeratorScreen from './screens/ModeratorScreen'
 
 export default function App() {
   const [screen, setScreen] = useState<'map' | 'report' | 'learn' | 'alerts' | 'moderator'>('map')
-
+  const [darkMode, setDarkMode] = useState(true)
   const tabs = [
     { id: 'map', icon: '🗺️', label: 'Map' },
     { id: 'report', icon: '📋', label: 'Report' },
@@ -17,12 +17,22 @@ export default function App() {
   ]
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
+   <div
+  style={{
+    display: 'flex',
+    flexDirection: 'column',
+    minHeight: '100vh',
+    background: darkMode ? '#0D0D0D' : '#F8FAFC',
+    color: darkMode ? '#FFFFFF' : '#111827'
+  }}
+>
 
       {/* TOP BAR */}
       <div style={{
-        background: '#131313',
-        borderBottom: '1px solid #2A2A2A',
+        background: darkMode ? '#131313' : '#FFFFFF',
+borderBottom: darkMode
+  ? '1px solid #2A2A2A'
+  : '1px solid #E5E7EB',
         padding: '14px 20px',
         display: 'flex',
         alignItems: 'center',
@@ -31,9 +41,44 @@ export default function App() {
         top: 0,
         zIndex: 100,
       }}>
-        <div style={{ fontFamily: 'Syne, sans-serif', fontWeight: 800, fontSize: '18px', color: '#fff' }}>
-          ⚡ Power<span style={{ color: '#F59E0B' }}>Watch</span>
-        </div>
+<div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+
+  <div style={{
+    fontFamily: 'Syne, sans-serif',
+    fontWeight: 800,
+    fontSize: '18px',
+    color: darkMode ? '#fff' : '#111827'
+  }}>
+    ⚡ Power<span style={{ color: '#F59E0B' }}>Watch</span>
+  </div>
+
+  <button
+    onClick={() => setDarkMode(!darkMode)}
+    style={{
+      width: '48px',
+      height: '24px',
+      borderRadius: '12px',
+      background: darkMode ? '#F59E0B' : '#D1D5DB',
+      border: 'none',
+      position: 'relative',
+      cursor: 'pointer'
+    }}
+  >
+    <div
+      style={{
+        width: '20px',
+        height: '20px',
+        borderRadius: '50%',
+        background: '#fff',
+        position: 'absolute',
+        top: '2px',
+        left: darkMode ? '26px' : '2px',
+        transition: '0.2s'
+      }}
+    />
+  </button>
+
+</div>
         <button
           onClick={() => setScreen('moderator')}
           style={{
@@ -51,11 +96,11 @@ export default function App() {
 
       {/* SCREEN CONTENT */}
       <div style={{ flex: 1, overflowY: 'auto', paddingBottom: '80px' }}>
-        {screen === 'map' && <MapScreen />}
-        {screen === 'report' && <ReportScreen />}
-        {screen === 'learn' && <LearnScreen />}
-        {screen === 'alerts' && <AlertsScreen />}
-        {screen === 'moderator' && <ModeratorScreen />}
+        {screen === 'map' && <MapScreen darkMode={darkMode} />}
+        {screen === 'report' && <ReportScreen darkMode={darkMode} />}
+        {screen === 'learn' && <LearnScreen darkMode={darkMode} />}
+        {screen === 'alerts' && <AlertsScreen darkMode={darkMode} />}
+        {screen === 'moderator' && <ModeratorScreen darkMode={darkMode} />}
       </div>
 
       {/* BOTTOM NAV */}
@@ -66,8 +111,10 @@ export default function App() {
         transform: 'translateX(-50%)',
         width: '100%',
         maxWidth: '430px',
-        background: '#131313',
-        borderTop: '1px solid #2A2A2A',
+        background: darkMode ? '#131313' : '#FFFFFF',
+        borderTop: darkMode
+         ? '1px solid #2A2A2A'
+        : '1px solid #E5E7EB',
         display: 'flex',
         zIndex: 100,
       }}>
