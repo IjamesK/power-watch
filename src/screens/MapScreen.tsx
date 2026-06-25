@@ -358,30 +358,56 @@ return (
   </div>
 )
 }    
-function OutagePin({ top, left, color, label, detail, onClick }: any) {
+function OutagePin({
+  top,
+  left,
+  color,
+  label,
+  detail,
+  onClick,
+}: any) {
   return (
     <div style={{ position: 'absolute', top, left }} onClick={onClick}>
-      <div style={{
-        width: '14px', height: '14px', borderRadius: '50%',
-        background: color, border: '2px solid #0D0D0D',
-        boxShadow: `0 0 10px ${color}`,
-        cursor: 'pointer',
-        opacity: 1,
-        transition: '0.2s',
-        animation: 'pulse 2s infinite',
-      }} />
-      <div style={{
-        position: 'absolute', top: '-40px', left: '50%',
-        transform: 'translateX(-50%)',
-        background: '#131313', border: `1px solid ${theme.border}`,
-        borderRadius: '6px', padding: '4px 8px',
-        fontSize: '9px', fontWeight: 600, color: '#E5E7EB',
-        whiteSpace: 'nowrap',
-        textAlign: 'center',
-      }}>
+      <div
+        style={{
+          width: '14px',
+          height: '14px',
+          borderRadius: '50%',
+          background: color,
+          border: '2px solid #0D0D0D',
+          boxShadow: `0 0 10px ${color}`,
+          cursor: 'pointer',
+          animation: 'pulse 2s infinite',
+        }}
+      />
+
+      <div
+        style={{
+          position: 'absolute',
+          top: '-40px',
+          left: '50%',
+          transform: 'translateX(-50%)',
+          background: '#131313',
+          border: '1px solid #2A2A2A',
+          borderRadius: '6px',
+          padding: '4px 8px',
+          fontSize: '9px',
+          fontWeight: 600,
+          color: '#E5E7EB',
+          whiteSpace: 'nowrap',
+          textAlign: 'center',
+        }}
+      >
         <div>{label}</div>
+
         {detail && (
-          <div style={{ fontSize: '8px', color: theme.secondary, marginTop: '2px' }}>
+          <div
+            style={{
+              fontSize: '8px',
+              color: '#9CA3AF',
+              marginTop: '2px',
+            }}
+          >
             {detail}
           </div>
         )}
@@ -389,36 +415,126 @@ function OutagePin({ top, left, color, label, detail, onClick }: any) {
     </div>
   )
 }
-function OutageCard({ zone, type, cause, duration, color, reports, onClick }: any) {
+function OutageCard({
+  zone,
+  type,
+  cause,
+  duration,
+  color,
+  reports,
+  onClick,
+}: any) {
   return (
     <div
       onClick={onClick}
       style={{
         cursor: 'pointer',
-        background: theme.card, border: `1px solid ${theme.border}`,
+        background: '#1A1A1A',
+        border: '1px solid #2A2A2A',
         borderLeft: `3px solid ${color}`,
-        borderRadius: '10px', padding: '14px 16px',
+        borderRadius: '10px',
+        padding: '14px 16px',
         marginBottom: '10px',
-      }}>
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '6px' }}>
+      }}
+    >
+      <div
+        style={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'flex-start',
+          marginBottom: '6px',
+        }}
+      >
         <div>
-          <div style={{ fontWeight: 700, color: theme.text, fontSize: '15px' }}>{zone}</div>
-          <div style={{ fontSize: '12px', color, fontWeight: 600, marginTop: '2px' }}>{type}</div>
+          <div
+            style={{
+              fontWeight: 700,
+              color: '#FFFFFF',
+              fontSize: '15px',
+            }}
+          >
+            {zone}
+          </div>
+
+          <div
+            style={{
+              fontSize: '12px',
+              color,
+              fontWeight: 600,
+              marginTop: '2px',
+            }}
+          >
+            {type}
+          </div>
         </div>
-        <div style={{ background: '#131313', border: `1px solid ${theme.border}`, borderRadius: '6px', padding: '4px 10px', textAlign: 'center' }}>
-          <div style={{ fontSize: '13px', fontWeight: 700, color: theme.text }}>{duration}</div>
-          <div style={{ fontSize: '10px', color: '#6B7280' }}>duration</div>
+
+        <div
+          style={{
+            background: '#131313',
+            border: '1px solid #2A2A2A',
+            borderRadius: '6px',
+            padding: '4px 10px',
+            textAlign: 'center',
+          }}
+        >
+          <div
+            style={{
+              fontSize: '13px',
+              fontWeight: 700,
+              color: '#FFFFFF',
+            }}
+          >
+            {duration}
+          </div>
+
+          <div
+            style={{
+              fontSize: '10px',
+              color: '#6B7280',
+            }}
+          >
+            duration
+          </div>
         </div>
       </div>
-      <div style={{ fontSize: '12px', color: theme.secondary, marginBottom: '10px' }}>📍 {cause}</div>
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-        <div style={{ fontSize: '11px', color: '#6B7280' }}>👥 {reports} community reports</div>
-        <button style={{
-          background: '#22C55E22', color: '#22C55E',
-          border: '1px solid #22C55E44',
-          borderRadius: '6px', padding: '5px 12px',
-          fontSize: '11px', fontWeight: 600,
-        }}>
+
+      <div
+        style={{
+          fontSize: '12px',
+          color: '#9CA3AF',
+          marginBottom: '10px',
+        }}
+      >
+        📍 {cause}
+      </div>
+
+      <div
+        style={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+        }}
+      >
+        <div
+          style={{
+            fontSize: '11px',
+            color: '#6B7280',
+          }}
+        >
+          👥 {reports} community reports
+        </div>
+
+        <button
+          style={{
+            background: '#22C55E22',
+            color: '#22C55E',
+            border: '1px solid #22C55E44',
+            borderRadius: '6px',
+            padding: '5px 12px',
+            fontSize: '11px',
+            fontWeight: 600,
+          }}
+        >
           ✓ Power Restored
         </button>
       </div>
