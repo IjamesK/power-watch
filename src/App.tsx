@@ -96,7 +96,7 @@ borderBottom: darkMode
 
       {/* SCREEN CONTENT */}
       <div style={{ flex: 1, overflowY: 'auto', paddingBottom: '80px' }}>
-        {screen === 'map' && <MapScreen darkMode={darkMode} />}
+        {screen === 'map' && <MapScreen />}
         {screen === 'report' && <ReportScreen />}
         {screen === 'learn' && <LearnScreen />}
         {screen === 'alerts' && <AlertsScreen />}
