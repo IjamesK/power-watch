@@ -1,6 +1,13 @@
 import { useEffect, useState } from 'react'
 
-export default function MapScreen() {
+export default function MapScreen({ darkMode }: any) {
+  const theme = {
+  background: darkMode ? '#0D0D0D' : '#F8FAFC',
+  card: darkMode ? '#1A1A1A' : '#FFFFFF',
+  border: darkMode ? '#2A2A2A' : '#E5E7EB',
+  text: darkMode ? '#FFFFFF' : '#111827',
+  secondary: darkMode ? '#9CA3AF' : '#6B7280'
+}
   const [selectedOutage, setSelectedOutage] = useState<any | null>(null)
   const [weather, setWeather] = useState<any>(null)
 
@@ -32,9 +39,9 @@ return (
     <button
       onClick={() => setSelectedOutage(null)}
       style={{
-        background: '#1A1A1A', border: '1px solid #2A2A2A',
+       background: theme.card, border: `1px solid ${theme.border}`,
         borderRadius: '8px', padding: '8px 14px',
-        color: '#9CA3AF', fontSize: '13px', fontWeight: 600,
+        color: theme.secondary, fontSize: '13px', fontWeight: 600,
         marginBottom: '16px', display: 'flex', alignItems: 'center', gap: '6px',
       }}>
       ← Back to Map
@@ -42,14 +49,14 @@ return (
 
     {/* HEADER CARD */}
     <div style={{
-      background: '#1A1A1A',
+      background: theme.card,
       border: `1px solid ${selectedOutage.color}44`,
       borderLeft: `4px solid ${selectedOutage.color}`,
       borderRadius: '12px', padding: '18px', marginBottom: '14px',
     }}>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '10px' }}>
         <div>
-          <div style={{ fontFamily: 'Syne, sans-serif', fontWeight: 800, fontSize: '22px', color: '#fff', marginBottom: '4px' }}>
+          <div style={{ fontFamily: 'Syne, sans-serif', fontWeight: 800, fontSize: '22px', color: theme.text, marginBottom: '4px' }}>
             {selectedOutage.zone}
           </div>
           <div style={{ fontSize: '13px', fontWeight: 600, color: selectedOutage.color }}>
@@ -60,7 +67,7 @@ return (
           background: '#131313', border: `1px solid ${selectedOutage.color}44`,
           borderRadius: '8px', padding: '8px 14px', textAlign: 'center',
         }}>
-          <div style={{ fontSize: '18px', fontWeight: 800, color: '#fff', fontFamily: 'Syne, sans-serif' }}>
+          <div style={{ fontSize: '18px', fontWeight: 800, color: theme.text, fontFamily: 'Syne, sans-serif' }}>
             {selectedOutage.duration}
           </div>
           <div style={{ fontSize: '10px', color: '#6B7280' }}>duration</div>
@@ -73,7 +80,7 @@ return (
 
     {/* AFFECTED AREAS */}
     <div style={{
-      background: '#1A1A1A', border: '1px solid #2A2A2A',
+      background: theme.card, border: `1px solid ${theme.border}`,
       borderRadius: '10px', padding: '14px 16px', marginBottom: '14px',
     }}>
       <div style={{ fontSize: '11px', fontWeight: 600, color: selectedOutage.color, textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '10px' }}>
@@ -82,7 +89,7 @@ return (
       <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
         {['Trading Centre', 'Main Road', 'Stage Area', 'Nearby Estates'].map(area => (
           <div key={area} style={{
-            background: '#131313', border: '1px solid #2A2A2A',
+            background: '#131313', border: `1px solid ${theme.border}`,
             borderRadius: '6px', padding: '5px 12px',
             fontSize: '12px', color: '#E5E7EB',
           }}>
@@ -94,7 +101,7 @@ return (
 
     {/* CHECKLIST */}
     <div style={{
-      background: '#1A1A1A', border: '1px solid #2A2A2A',
+      background: theme.card, border: `1px solid ${theme.border}`,
       borderRadius: '10px', padding: '14px 16px', marginBottom: '14px',
     }}>
       <div style={{ fontSize: '11px', fontWeight: 600, color: selectedOutage.color, textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '10px' }}>
@@ -112,7 +119,7 @@ return (
           alignItems: 'flex-start',
         }}>
           <span style={{ color: selectedOutage.color, fontWeight: 700, flexShrink: 0 }}>→</span>
-          <span style={{ fontSize: '13px', color: '#9CA3AF', lineHeight: 1.5 }}>{item}</span>
+          <span style={{ fontSize: '13px', color: theme.secondary, lineHeight: 1.5 }}>{item}</span>
         </div>
       ))}
     </div>
@@ -147,7 +154,7 @@ return (
         <span style={{ fontSize: '20px' }}>⚠️</span>
         <div>
           <div style={{ fontWeight: 600, color: '#F59E0B', fontSize: '13px' }}>2 Active Outages Near You</div>
-          <div style={{ fontSize: '12px', color: '#9CA3AF', marginTop: '2px' }}>Ntinda & Kamwokya affected</div>
+          <div style={{ fontSize: '12px', color: theme.secondary, marginTop: '2px' }}>Ntinda & Kamwokya affected</div>
         </div>
       </div>
 {/* WEATHER WIDGET */}
@@ -166,8 +173,8 @@ return (
             <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
               <span style={{ fontSize: '28px' }}>{weather.icon}</span>
               <div>
-                <div style={{ fontSize: '18px', fontWeight: 700, color: '#fff' }}>{weather.temp}°C</div>
-                <div style={{ fontSize: '12px', color: '#9CA3AF' }}>{weather.condition}</div>
+                <div style={{ fontSize: '18px', fontWeight: 700, color: theme.text }}>{weather.temp}°C</div>
+                <div style={{ fontSize: '12px', color: theme.secondary }}>{weather.condition}</div>
               </div>
             </div>
             <div style={{ textAlign: 'right' }}>
@@ -189,8 +196,8 @@ return (
       </div>
       {/* MAP PLACEHOLDER */}
       <div style={{
-        background: '#1A1A1A',
-        border: '1px solid #2A2A2A',
+        background: theme.card,
+        border: `1px solid ${theme.border}`,
         borderRadius: '12px',
         height: '260px',
         position: 'relative',
@@ -205,7 +212,7 @@ return (
           opacity: 0.5,
         }} />
 
-        <div style={{ position: 'absolute', top: '12px', left: '12px', background: '#131313', border: '1px solid #2A2A2A', borderRadius: '6px', padding: '5px 10px', fontSize: '11px', fontWeight: 600, color: '#E5E7EB' }}>
+        <div style={{ position: 'absolute', top: '12px', left: '12px', background: '#131313', border: `1px solid ${theme.border}`, borderRadius: '6px', padding: '5px 10px', fontSize: '11px', fontWeight: 600, color: '#E5E7EB' }}>
           🗺️ Kampala, Uganda
         </div>
 
@@ -269,7 +276,7 @@ return (
         {/* LEGEND */}
         <div style={{
           position: 'absolute', bottom: '12px', right: '12px',
-          background: '#131313', border: '1px solid #2A2A2A',
+          background: '#131313', border: `1px solid ${theme.border}`,
           borderRadius: '8px', padding: '8px 12px',
           display: 'flex', flexDirection: 'column', gap: '4px',
         }}>
@@ -281,14 +288,14 @@ return (
           ].map(l => (
             <div key={l.label} style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
               <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: l.color }} />
-              <span style={{ fontSize: '10px', color: '#9CA3AF' }}>{l.label}</span>
+              <span style={{ fontSize: '10px', color: theme.secondary }}>{l.label}</span>
             </div>
           ))}
         </div>
       </div>
 
       {/* OUTAGE CARDS */}
-      <div style={{ fontWeight: 600, fontSize: '13px', color: '#9CA3AF', marginBottom: '10px', letterSpacing: '0.05em', textTransform: 'uppercase' }}>Active Incidents</div>
+      <div style={{ fontWeight: 600, fontSize: '13px', color: theme.secondary, marginBottom: '10px', letterSpacing: '0.05em', textTransform: 'uppercase' }}>Active Incidents</div>
 
      <OutageCard
   zone="Ntinda"
@@ -366,7 +373,7 @@ function OutagePin({ top, left, color, label, detail, onClick }: any) {
       <div style={{
         position: 'absolute', top: '-40px', left: '50%',
         transform: 'translateX(-50%)',
-        background: '#131313', border: '1px solid #2A2A2A',
+        background: '#131313', border: `1px solid ${theme.border}`,
         borderRadius: '6px', padding: '4px 8px',
         fontSize: '9px', fontWeight: 600, color: '#E5E7EB',
         whiteSpace: 'nowrap',
@@ -374,7 +381,7 @@ function OutagePin({ top, left, color, label, detail, onClick }: any) {
       }}>
         <div>{label}</div>
         {detail && (
-          <div style={{ fontSize: '8px', color: '#9CA3AF', marginTop: '2px' }}>
+          <div style={{ fontSize: '8px', color: theme.secondary, marginTop: '2px' }}>
             {detail}
           </div>
         )}
@@ -388,22 +395,22 @@ function OutageCard({ zone, type, cause, duration, color, reports, onClick }: an
       onClick={onClick}
       style={{
         cursor: 'pointer',
-        background: '#1A1A1A', border: '1px solid #2A2A2A',
+        background: theme.card, border: `1px solid ${theme.border}`,
         borderLeft: `3px solid ${color}`,
         borderRadius: '10px', padding: '14px 16px',
         marginBottom: '10px',
       }}>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '6px' }}>
         <div>
-          <div style={{ fontWeight: 700, color: '#fff', fontSize: '15px' }}>{zone}</div>
+          <div style={{ fontWeight: 700, color: theme.text, fontSize: '15px' }}>{zone}</div>
           <div style={{ fontSize: '12px', color, fontWeight: 600, marginTop: '2px' }}>{type}</div>
         </div>
-        <div style={{ background: '#131313', border: '1px solid #2A2A2A', borderRadius: '6px', padding: '4px 10px', textAlign: 'center' }}>
-          <div style={{ fontSize: '13px', fontWeight: 700, color: '#fff' }}>{duration}</div>
+        <div style={{ background: '#131313', border: `1px solid ${theme.border}`, borderRadius: '6px', padding: '4px 10px', textAlign: 'center' }}>
+          <div style={{ fontSize: '13px', fontWeight: 700, color: theme.text }}>{duration}</div>
           <div style={{ fontSize: '10px', color: '#6B7280' }}>duration</div>
         </div>
       </div>
-      <div style={{ fontSize: '12px', color: '#9CA3AF', marginBottom: '10px' }}>📍 {cause}</div>
+      <div style={{ fontSize: '12px', color: theme.secondary, marginBottom: '10px' }}>📍 {cause}</div>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
         <div style={{ fontSize: '11px', color: '#6B7280' }}>👥 {reports} community reports</div>
         <button style={{
