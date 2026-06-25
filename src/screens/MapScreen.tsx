@@ -3,13 +3,6 @@ import { useEffect, useState } from 'react'
 export default function MapScreen({ darkMode }: any) {
   const [selectedOutage, setSelectedOutage] = useState<any | null>(null)
   const [weather, setWeather] = useState<any>(null)
-  const theme = {
-  background: darkMode ? '#131313' : '#FFFFFF',
-  card: darkMode ? '#1A1A1A' : '#FFFFFF',
-  border: darkMode ? '#2A2A2A' : '#E5E7EB',
-  text: darkMode ? '#FFFFFF' : '#111827',
-  secondary: darkMode ? '#9CA3AF' : '#6B7280'
-}
 
   useEffect(() => {
     fetch('https://api.open-meteo.com/v1/forecast?latitude=0.3163&longitude=32.5822&current=temperature_2m,precipitation,windspeed_10m&timezone=Africa%2FNairobi')
