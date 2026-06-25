@@ -5,11 +5,11 @@ import './App.css'
 import MapScreen from './screens/MapScreen'
 import ReportScreen from './screens/ReportScreen'
 import LearnScreen from './screens/LearnScreen'
-import AlertsScreen from './screens/AlertsScreen'
+import Screen from './screens/Screen'
 import ModeratorScreen from './screens/ModeratorScreen'
 
 export default function App() {
-  const [screen, setScreen] = useState<'map' | 'report' | 'learn' | 'alerts' | 'moderator'>('map')
+  const [screen, setScreen] = useState<'map' | 'report' | 'learn' | '' | 'moderator'>('map')
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
@@ -70,7 +70,7 @@ export default function App() {
           { id: 'map', icon: '🗺️', label: 'Map' },
           { id: 'report', icon: '📋', label: 'Report' },
           { id: 'learn', icon: '📚', label: 'Learn' },
-          { id: 'alerts', icon: '🔔', label: 'Alerts' },
+          { id: 'alerts', icon: '🔔', label: 'Alerts', badge: 2 },
         ].map(tab => (
           <button
             key={tab.id}
@@ -87,7 +87,20 @@ export default function App() {
               borderTop: screen === tab.id ? '2px solid #F59E0B' : '2px solid transparent',
               transition: 'all 0.15s',
             }}>
-            <span style={{ fontSize: '18px' }}>{tab.icon}</span>
+            <div style={{ position: 'relative', display: 'inline-block' }}>
+  <span style={{ fontSize: '18px' }}>{tab.icon}</span>
+  {tab.badge && (
+    <span style={{
+      position: 'absolute', top: '-4px', right: '-6px',
+      background: '#EF4444', color: '#fff',
+      fontSize: '9px', fontWeight: 700,
+      width: '14px', height: '14px',
+      borderRadius: '50%', display: 'flex',
+      alignItems: 'center', justifyContent: 'center',
+    }}>{tab.badge}</span>
+  )}
+</div>
+<span style={{ fontSize: '10px', fontWeight: 600 }}>{tab.label}</span>
             <span style={{ fontSize: '10px', fontWeight: 600 }}>{tab.label}</span>
           </button>
         ))}
