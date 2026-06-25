@@ -227,7 +227,18 @@ return (
     })
   }
 />
-        <OutagePin top={140} left={200} color="#F59E0B" label="Kamwokya" detail="Area Outage · 45m" />
+        <OutagePin 
+          top={140} left={200} color="#F59E0B" label="Kamwokya" detail="Area Outage · 45m" 
+            onClick={() =>
+    setSelectedOutage({
+      zone: "Kamwokya",
+      type: "Area Outage",
+      cause: "Road Construction - KCCA Works",
+      duration: "45m",
+      color: "#EF4444",
+      reports: 12
+    })
+  }/>
         <OutagePin top={60} left={240} color="#F59E0B" label="Bukoto" detail="Risk Flag · Storm" />
         <OutagePin top={180} left={80} color="#22C55E" label="Makindye" detail="Power Restored" />
 
